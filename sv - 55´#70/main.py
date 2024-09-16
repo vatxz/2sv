@@ -7,6 +7,7 @@ from pynput import keyboard
 import threading
 import my_thread
 from my_thread import ThreadGroup
+import time
  
     
 def kill_monster():
