@@ -10,16 +10,37 @@ from my_thread import ThreadGroup
  
     
 def kill_monster():
-    while actions.check_battle() == None:
+    while actions.check_battle() is None:
         print("Matando monstruos")
         if event_th.is_set():
             return
         pg.press("space")
-        while pg.locateOnScreen("imgs/redtarget.png", confidence=0.6, region=constants.REGION_BATTLE) != None:
+        
+        # Iniciar rotación de teclas mientras la imagen esté presente
+        while pg.locateOnScreen("imgs/redtarget.png", confidence=0.6, region=constants.REGION_BATTLE) is not None:
             if event_th.is_set():
                 return
-            print("esperando monstruo morir")
-        print("buscando munstruo")
+            print("Esperando monstruo morir")
+            
+            # Presiona F1, F2, F3 en un bucle con 1 segundo de intervalo
+            time.sleep(1)
+            pg.press("f2")
+            print("Presionando F2")
+            time.sleep(2)
+            # Verificar si la imagen aún está presente
+            if pg.locateOnScreen("imgs/redtarget.png", confidence=0.6, region=constants.REGION_BATTLE) is None:
+                break
+            pg.press("f5")
+            print("Presionando F5")
+            time.sleep(2)
+            # Verificar si la imagen aún está presente
+            if pg.locateOnScreen("imgs/redtarget.png", confidence=0.6, region=constants.REGION_BATTLE) is None:
+                break
+            pg.press("f7")
+            print("Presionando F7")
+            time.sleep(1)
+        
+        print("Buscando monstruo")
       
 def get_loot():
     loot = pg.locateAllOnScreen("imgs/battle2.PNG", confidence=0.6, region=constants.REGION_BATTLE)
